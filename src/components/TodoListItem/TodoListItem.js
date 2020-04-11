@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './TodoListItem.scss';
 
-const TodoListItem = ( { label, important = false } ) => {
-    const style = {
-        color: important ? 'blue' : 'black'
-    };
+export default class TodoListItem extends Component {
+    render() {
+        const { label, important = false } = this.props;
 
-    return (
-        <div className={'d-flex justify-content-between align-items-center'}>
-            <span>
-                <span style={style}>{ label }</span>
-            </span>
+        const style = {
+            color: important ? 'blue' : 'black'
+        };
 
-            <span>
-                <span className={'badge badge-danger mr-2'}>x</span>
-                <span className={'badge badge-primary badge-pill'}>i</span>
-            </span>
-        </div>
-    );
-};
+        return (
+            <div className={'d-flex justify-content-between align-items-center'}>
+                <span>
+                    <span style={style}>{ label }</span>
+                </span>
 
-export default TodoListItem;
+                    <span>
+                    <span className={'badge badge-danger mr-2'}>x</span>
+                    <span className={'badge badge-primary badge-pill'}>i</span>
+                </span>
+            </div>
+        );
+    }
+}
