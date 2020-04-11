@@ -1,0 +1,24 @@
+.btn-group {
+  button {
+    color: #000;
+    border-radius: 0;
+    margin-right: 10px;
+    background-color: #fff;
+    
+    &:hover {
+      background-color: #393939;
+    }
+  }
+}
+
+.form-control {
+  &:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+  }
+
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+  background-color: #efefef;
+  color: #000;
+}
