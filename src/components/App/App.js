@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.scss';
 
 import AppHeader from "../AppHeader/AppHeader";
