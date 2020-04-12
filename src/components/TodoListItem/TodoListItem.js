@@ -27,7 +27,7 @@ export default class TodoListItem extends Component {
     };
 
     render() {
-        const { label } = this.props;
+        const { label, onDeleted } = this.props;
         const { done, important } = this.state;
 
         let classNames = '';
@@ -46,7 +46,7 @@ export default class TodoListItem extends Component {
                 </span>
 
                 <span>
-                    <span className={'badge badge-danger mr-2'}>x</span>
+                    <span className={'badge badge-danger mr-2'} onClick={onDeleted}>x</span>
                     <span className={'badge badge-primary badge-pill'} onClick={this.oneClickImportant}>i</span>
                 </span>
             </div>
