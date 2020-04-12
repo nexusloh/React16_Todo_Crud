@@ -5,38 +5,45 @@ export default class TodoListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            done: false
+            done: false,
+            important: false
         };
 
-        this.oneClick = () => {
+        this.oneClickSpan = () => {
             this.setState({
                 done: true
             });
         };
+
+        this.oneClickImportant = () => {
+            this.setState({
+                important: true
+            })
+        }
     }
 
     render() {
-        const { label, important = false } = this.props;
+        const { label } = this.props;
+        const { done, important } = this.state;
 
-        const { done } = this.state;
         let classNames = '';
         if (done) {
             classNames += ' done'
         }
 
-        const style = {
-            color: important ? 'blue' : 'black'
-        };
+        if (important) {
+            classNames += ' important'
+        }
 
         return (
             <div className={'d-flex justify-content-between align-items-center'}>
                 <span>
-                    <span className={classNames} onClick={this.oneClick} style={style}>{ label }</span>
+                    <span className={classNames} onClick={this.oneClickSpan}>{ label }</span>
                 </span>
 
                 <span>
                     <span className={'badge badge-danger mr-2'}>x</span>
-                    <span className={'badge badge-primary badge-pill'}>i</span>
+                    <span className={'badge badge-primary badge-pill'} onClick={this.oneClickImportant}>i</span>
                 </span>
             </div>
         );
