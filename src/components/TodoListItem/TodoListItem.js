@@ -10,17 +10,21 @@ export default class TodoListItem extends Component {
         };
 
         this.oneClickSpan = () => {
-            this.setState({
-                done: true
+            this.setState(({done}) => {
+                return {
+                    done: !done
+                };
             });
         };
 
         this.oneClickImportant = () => {
-            this.setState({
-                important: true
-            })
-        }
-    }
+            this.setState(({important}) => {
+                return {
+                    important: !important
+                };
+            });
+        };
+    };
 
     render() {
         const { label } = this.props;
