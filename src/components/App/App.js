@@ -32,25 +32,33 @@ export default class Class extends Component {
             });
         };
 
+        this.toggleProp = (arr, id, propName) => {
+            let index = arr.findIndex((element) => element.id === id);
+
+            let oldItem = arr[index]
+            let newItem = { ...oldItem, [propName]: !oldItem[propName] }
+
+            return [
+                ...arr.slice(0, index),
+                newItem,
+                ...arr.slice(index + 1)
+            ];
+        };
+
         this.isDone = (id) => {
             this.setState(({todoData}) => {
-                let index = todoData.findIndex((element) => element.id === id);
-
-                let oldItem = todoData[index]
-                let newItem = { ...oldItem, done: !oldItem.done }
-
-                let newArray = [
-                    ...todoData.slice(0, index),
-                    newItem,
-                    ...todoData.slice(index + 1)
-                ];
-
-                return { todoData: newArray }
+                return {
+                    todoData: this.toggleProp(todoData, id, 'done')
+                }
             });
         };
 
         this.isImportant = (id) => {
-            console.log('i', id);
+            this.setState(({todoData}) => {
+                return {
+                    todoData: this.toggleProp(todoData, id, 'important')
+                }
+            });
         };
     };
 
