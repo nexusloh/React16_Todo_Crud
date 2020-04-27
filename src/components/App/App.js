@@ -11,9 +11,9 @@ export default class Class extends Component {
 
         this.state = {
             todoData: [
-                { id: 1, label: '111', important: false },
-                { id: 2, label: '222', important: true },
-                { id: 3, label: '333', important: false },
+                { id: 1, label: '111', important: false, done: false },
+                { id: 2, label: '222', important: true, done: false },
+                { id: 3, label: '333', important: false, done: false },
             ]
         };
 
@@ -31,6 +31,27 @@ export default class Class extends Component {
                 };
             });
         };
+
+        this.isDone = (id) => {
+            this.setState(({todoData}) => {
+                let index = todoData.findIndex((element) => element.id === id);
+
+                let oldItem = todoData[index]
+                let newItem = { ...oldItem, done: !oldItem.done }
+
+                let newArray = [
+                    ...todoData.slice(0, index),
+                    newItem,
+                    ...todoData.slice(index + 1)
+                ];
+
+                return { todoData: newArray }
+            });
+        };
+
+        this.isImportant = (id) => {
+            console.log('i', id);
+        };
     };
 
     render() {
@@ -41,6 +62,8 @@ export default class Class extends Component {
                 <TodoList
                     todoItems={ this.state.todoData }
                     onDeleted={ this.itemDelete }
+                    isDone={ this.isDone }
+                    isImportant={ this.isImportant }
                 />
             </div>
         );
