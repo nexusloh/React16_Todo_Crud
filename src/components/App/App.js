@@ -55,12 +55,16 @@ export default class Class extends Component {
     };
 
     render() {
+        let { todoData } = this.state;
+        let doneCount = todoData.filter((el) => el.done).length;
+        let todoCount = todoData.length - doneCount;
+
         return (
             <div className={'app-wrapper'}>
-                <AppHeader/>
+                <AppHeader doneCount={ doneCount } todoCount={ todoCount } />
                 <SearchBar/>
                 <TodoList
-                    todoItems={ this.state.todoData }
+                    todoItems={ todoData }
                     onDeleted={ this.itemDelete }
                     isDone={ this.isDone }
                     isImportant={ this.isImportant }
