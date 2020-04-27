@@ -17,7 +17,8 @@ export default class Class extends Component {
                 { id: 3, label: '333', important: false, done: false },
             ],
 
-            maxId: 10
+            maxId: 10,
+            term: ''
         };
 
         this.createTodoItem = (label) => {
@@ -84,19 +85,35 @@ export default class Class extends Component {
                 }
             });
         };
+
+        this.search = (items, term) => {
+            if (term.length === 0) {
+                return items;
+            }
+
+            return items.filter((item) => {
+                return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1
+            });
+        };
+
+        this.onSearchChange = (term) => {
+            this.setState({ term });
+        };
     };
 
     render() {
-        let { todoData } = this.state;
+        let { todoData, term } = this.state;
+
+        let filteredItems = this.search(todoData, term)
         let doneCount = todoData.filter((el) => el.done).length;
         let todoCount = todoData.length - doneCount;
 
         return (
             <div className={'app-wrapper'}>
                 <AppHeader doneCount={ doneCount } todoCount={ todoCount } />
-                <SearchBar/>
+                <SearchBar onSearchChange={this.onSearchChange}/>
                 <TodoList
-                    todoItems={ todoData }
+                    todoItems={ filteredItems }
                     onDeleted={ this.itemDelete }
                     isDone={ this.isDone }
                     isImportant={ this.isImportant }
