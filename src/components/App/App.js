@@ -4,6 +4,7 @@ import './App.scss';
 import AppHeader from "../AppHeader/AppHeader";
 import SearchBar from "../SearchBar/SearchBar";
 import TodoList from "../TodoList/TodoList";
+import AddItemForm from "../AddItemForm/AddItemForm";
 
 export default class Class extends Component {
     constructor(props) {
@@ -14,8 +15,19 @@ export default class Class extends Component {
                 { id: 1, label: '111', important: false, done: false },
                 { id: 2, label: '222', important: true, done: false },
                 { id: 3, label: '333', important: false, done: false },
-            ]
+            ],
+
+            maxId: 10
         };
+
+        this.createTodoItem = (label) => {
+            return {
+                label,
+                important: false,
+                done: false,
+                id: this.state.maxId++
+            }
+        }
 
         this.itemDelete = (id) => {
             this.setState(({ todoData }) => {
@@ -28,6 +40,18 @@ export default class Class extends Component {
 
                 return {
                     todoData: newArray
+                };
+            });
+        };
+
+        this.itemAdd = (text) => {
+            let newItem = this.createTodoItem(text)
+
+            this.setState(({ todoData }) => {
+                let newArr = [...todoData, newItem];
+
+                return {
+                    todoData: newArr
                 };
             });
         };
@@ -77,6 +101,7 @@ export default class Class extends Component {
                     isDone={ this.isDone }
                     isImportant={ this.isImportant }
                 />
+                <AddItemForm itemAdd={this.itemAdd}/>
             </div>
         );
     };

@@ -1,17 +1,20 @@
 {
   "component": {
     "path": "src/components",
-    "css": {
-      "preprocessor": "scss",
-      "module": false,
-      "withStyle": true
-    },
-    "withStory": false,
     "withLazy": false,
-    "test": {
-      "library": "None",
-      "withTest": false
-    }
+    "withStory": false,
+    "withStyle": true,
+    "withTest": false
   },
-  "usesTypeScript": false
+  "usesTypeScript": false,
+  "usesCssModule": false,
+  "cssPreprocessor": "scss",
+  "testLibrary": "None",
+  "page": {
+    "path": "",
+    "withStyle": true,
+    "withTest": false,
+    "withStory": true,
+    "withLazy": false
+  }
 }
