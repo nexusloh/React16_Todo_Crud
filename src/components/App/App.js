@@ -18,7 +18,8 @@ export default class Class extends Component {
             ],
 
             maxId: 10,
-            term: ''
+            term: '',
+            filter: 'all'
         };
 
         this.createTodoItem = (label) => {
@@ -99,26 +100,43 @@ export default class Class extends Component {
         this.onSearchChange = (term) => {
             this.setState({ term });
         };
+
+        this.onFilterChange = (filter) => {
+            this.setState({ filter });
+        };
+
+        this.filter = (items, filter) => {
+            switch (filter) {
+                case 'all':
+                    return items;
+                case 'done':
+                    return items.filter((item) => !item.done);
+                case 'important':
+                    return items.filter((item) => item.important);
+                default:
+                    return items;
+            }
+        };
     };
 
     render() {
-        let { todoData, term } = this.state;
+        let { todoData, term, filter } = this.state;
 
-        let filteredItems = this.search(todoData, term)
+        let filteredItems = this.filter(this.search(todoData, term), filter);
         let doneCount = todoData.filter((el) => el.done).length;
         let todoCount = todoData.length - doneCount;
 
         return (
             <div className={'app-wrapper'}>
                 <AppHeader doneCount={ doneCount } todoCount={ todoCount } />
-                <SearchBar onSearchChange={this.onSearchChange}/>
+                <SearchBar onFilterChange={ this.onFilterChange } onSearchChange={ this.onSearchChange } filter={ this.state.filter }/>
                 <TodoList
                     todoItems={ filteredItems }
                     onDeleted={ this.itemDelete }
                     isDone={ this.isDone }
                     isImportant={ this.isImportant }
                 />
-                <AddItemForm itemAdd={this.itemAdd}/>
+                <AddItemForm itemAdd={ this.itemAdd }/>
             </div>
         );
     };

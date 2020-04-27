@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Filter from "../Filter/Filter";
 import './SearchBar.scss';
+import Filter from "../Filter/Filter";
 
 export default class SearchBar extends Component {
 
@@ -8,7 +8,7 @@ export default class SearchBar extends Component {
         super(props);
 
         this.state = {
-            term: ''
+            term: '',
         };
 
         this.onSearch = (e) => {
@@ -19,6 +19,8 @@ export default class SearchBar extends Component {
     }
 
     render() {
+        const { filter, onFilterChange } = this.props
+
         return (
             <div className={'btn-toolbar mb-3'}>
                 <div className="btn-group">
@@ -29,7 +31,7 @@ export default class SearchBar extends Component {
                         onChange={ this.onSearch }
                     />
                 </div>
-                <Filter/>
+                <Filter onFilterChange={ onFilterChange } filter={ filter }/>
             </div>
         );
     }
